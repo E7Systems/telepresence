@@ -10,7 +10,7 @@
   <script type="text/javascript">google.load("jquery", "1.3.2");</script>
   <script type="text/javascript"
       src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
-  <script src="//github.com/E7Systems/telepresence/raw/master/teleprescenceclient.js"></script>
+  <script src="//rawgit.com/E7Systems/telepresence/master/teleprescenceclient.js"></script>
 
 ]]></Content>
 </Module>
