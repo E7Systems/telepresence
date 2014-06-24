@@ -4,9 +4,10 @@ function init() {
   while(!gapi.hangout.isApiReady()) {};
   gapi.hangout.data.setValue("keys", JSON.stringify(keysPressed));
   bodyElem.keydown(function(evt) {
-    keysPressed.push(evt.which);
-    if(keys.indexOf(evt.which) == -1)
+    if(keysPressed.indexOf(evt.which) == -1) {
+      keysPressed.push(evt.which);
       gapi.hangout.data.setValue("keys", JSON.stringify(keysPressed));
+    }
   });
   bodyElem.keyup(function(evt) {
     var index = keysPressed.indexOf(evt.which);
@@ -17,11 +18,9 @@ function init() {
   });
   var lastData = gapi.hangout.data.getValue("keys");
   setInterval(function() {
-    console.log(gapi.hangout.data.getKeys());
     if(gapi.hangout.data.getValue("keys") != lastData) {
-      alert(gapi.hangout.data.getValue("keys"));
       lastData = gapi.hangout.data.getValue("keys");
-      alert(lastData);
+      console.log("New Keys: " + lastData);
     }
   }, 50, 50);
 }
