@@ -1,5 +1,6 @@
 var bodyElem = $("body");
 var keysPressed = [];
+gapi.hangout.data.setValue("keys", keysPressed);
 bodyElem.keydown(function(evt) {
   keysPressed.push(evt.which);
   if(keys.indexOf(evt.which) == -1)
