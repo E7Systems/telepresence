@@ -12,3 +12,11 @@ bodyElem.keyup(function(evt) {
     gapi.hangout.data.setValue("keys", keysPressed);
   }
 });
+var lastData = gapi.hangout.data.getValue("keys");
+while(true) {
+  if(gapi.hangout.data.getValue("keys") != lastData) {
+    alert(gapi.hangout.data.getValue("keys"));
+    lastData = gapi.hangout.data.getValue("keys");
+    alert(lastData);
+  }
+}
