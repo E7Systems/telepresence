@@ -1,5 +1,5 @@
 var bodyElem = $("body");
-var keysPressed = {};
+var keysPressed = [];
 bodyElem.keydown(function(evt) {
   keysPressed.push(evt.which);
   if(keys.indexOf(evt.which) == -1)
