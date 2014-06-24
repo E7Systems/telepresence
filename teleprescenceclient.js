@@ -1,5 +1,6 @@
 var bodyElem = $("body");
 var keysPressed = [];
+while(!gapi.hangout.isApiReady()) {};
 gapi.hangout.data.setValue("keys", JSON.stringify(keysPressed));
 bodyElem.keydown(function(evt) {
   keysPressed.push(evt.which);
