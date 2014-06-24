@@ -15,6 +15,7 @@ bodyElem.keyup(function(evt) {
 });
 var lastData = gapi.hangout.data.getValue("keys");
 while(true) {
+  console.log(gapi.hangout.getKeys());
   if(gapi.hangout.data.getValue("keys") != lastData) {
     alert(gapi.hangout.data.getValue("keys"));
     lastData = gapi.hangout.data.getValue("keys");
