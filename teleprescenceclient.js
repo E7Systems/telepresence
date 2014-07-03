@@ -52,7 +52,7 @@ function generateSecureKey() {
 	var lastY = 0;
 	$("body").mousemove(function(evt) {
 		if(Math.round(Math.random()*100) <= 30) {
-			var multVal = Math.abs(lastX - evt.X) * Math.abs(lastY - evt.Y);
+			var multVal = Math.abs(lastX - evt.pageX) * Math.abs(lastY - evt.pageY);
 			seeds.push(multVal);
 			console.log(multVal);
 		}
