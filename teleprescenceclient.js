@@ -50,15 +50,14 @@ function generateSecureKey() {
 	var seeds = new Array();
 	var lastX = 0;
 	var lastY = 0;
-	$("body").append("<div id='randGen'></div>");
-	$("#randGen").mousemove(function(evt) {
+	$("body").mousemove(function(evt) {
 		if(Math.round(Math.random()*100) <= 30) {
 			var multVal = Math.abs(lastX - evt.X) * Math.abs(lastY - evt.Y);
 			seeds.push(multVal);
 			console.log(multVal);
 		}
 		if(seeds.length >= 5) {
-			$("#randGen").unbind();
+			$("body").unbind("mousemove");
 			gapi.hangout.layout.dismissNotice();
 			gapi.hangout.layout.displayNotice("Generation finished.", true);	
 			console.log(seeds.join(","));
