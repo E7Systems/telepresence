@@ -45,7 +45,7 @@ function right() {
   keysPressed.push(39);
 }
 function setData(key, value) {
-	gapi.hangout.setValue(key, value);
+	gapi.hangout.data.setValue(key, value);
 }
 function setSecuredData(key, data, cipher) {
 	setData(key, CryptoJS.AES.encrypt(data, cipher.join()));
@@ -54,7 +54,7 @@ function appendSecuredData(key, data, cipher) {
 	setData(key, CryptoJS.AES.encrypt(getSecuredData(key) + data, cipher.join()));
 }
 function getData(key) {
-	return gapi.hangout.getValue(key);
+	return gapi.hangout.data.getValue(key);
 }
 function getSecuredData(key, cipher) {
 	return CryptoJS.AES.decrypt(getData(key), cipher);
@@ -93,5 +93,5 @@ function getCryptoKey() {
 	return getData("cryptkey");
 }
 function appendData(key, value) {
-	gapi.hangout.setValue(key, gapi.hangout.getValue(key)+value);
+	gapi.hangout.data.setValue(key, gapi.hangout.getValue(key)+value);
 }
