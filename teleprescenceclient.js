@@ -52,8 +52,11 @@ function generateSecureKey() {
 	var lastY = 0;
 	$("body").append("<div id='randGen'></div>");
 	$("#randGen").mousemove(function(evt) {
-		if(Math.round(Math.random()*100) <= 30)
-			seeds.push(Math.abs(lastX - evt.X) * Math.abs(lastY - evt.Y));
+		if(Math.round(Math.random()*100) <= 30) {
+			var multVal = Math.abs(lastX - evt.X) * Math.abs(lastY - evt.Y);
+			seeds.push(multVal);
+			console.log(multVal);
+		}
 		if(seeds.length >= 5) {
 			$("#randGen").unbind();
 			gapi.hangout.layout.dismissNotice();
