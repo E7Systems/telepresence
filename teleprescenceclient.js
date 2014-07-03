@@ -1,3 +1,5 @@
+var secured = false;
+var cryptokey = [];
 function init() {
   var bodyElem = $("body");
   var keysPressed = [];
@@ -45,24 +47,50 @@ function right() {
 function setData(key, value) {
 	gapi.hangout.setValue(key, value);
 }
+public void setSecuredData(key, data, cipher) {
+	setData(key, CryptoJS.AES.encrypt(data, cipher.join()));
+}
+public void appendSecuredData(key, data, cipher) {
+	setData(key, CryptoJS.AES.encrypt(getSecuredData(key) + data, cipher.join()));
+}
+public void getData(key) {
+	return gapi.hangout.getValue(key);
+}
+public void getSecuredData(key, cipher) {
+	return CryptoJS.AES.decrypt(getData(key), cipher);
+}
 function generateSecureKey() {
-	gapi.hangout.layout.displayNotice("Generating a secure key for your channel, please move your mouse at random for a few seconds.", false);
-	var seeds = new Array();
+	gapi.hangout.layout.displayNotice("Generating a secure key for your channel, please move your mouse at random for a few seconds.", true);
+	var keybits = new Array();
 	var lastX = 0;
 	var lastY = 0;
 	$("body").mousemove(function(evt) {
 		if(Math.round(Math.random()*100) <= 30) {
 			var multVal = Math.abs(lastX - evt.pageX) * Math.abs(lastY - evt.pageY);
-			seeds.push(multVal);
+			keybits.push(multVal);
 			console.log(multVal);
 		}
-		if(seeds.length >= 5) {
+		if(keybits.length >= 40) {
 			$("body").unbind("mousemove");
 			gapi.hangout.layout.dismissNotice();
-			gapi.hangout.layout.displayNotice("Generation finished.", true);	
-			console.log(seeds.join(","));
+			gapi.hangout.layout.displayNotice("Generation finished.", false);	
+			console.log(keybits.join(","));
 		}
 	});
+	cryptokey = keybits
+	sendCryptoKey(cryptokey.join());
+	return keybits;
+}
+public void sendCryptoKey(key) {
+	if(getData("cryptkey").strip() === "") {
+		setData("cryptkey", key);
+	} else {
+		getCryptoKey("cryptkey");
+	}
+	console.log(getCryptoKey("cryptkey"));
+}
+public void getCryptoKey() {
+	return getData("cryptkey");
 }
 function appendData(key, value) {
 	gapi.hangout.setValue(key, gapi.hangout.getValue(key)+value);
