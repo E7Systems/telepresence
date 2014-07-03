@@ -46,7 +46,7 @@ function setData(key, value) {
 }
 function generateSecureKey() {
 	gapi.hangout.layout.displayNotice("Generating a secure key for your channel, please move your mouse at random for a few seconds.", false);
-	int[] seeds = new Array();
+	var seeds = new Array();
 	int lastX = 0;
 	int lastY = 0;
 	$("body").append("<div id='randGen'></div>");
