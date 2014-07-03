@@ -2,6 +2,7 @@ function init() {
   var bodyElem = $("body");
   var keysPressed = [];
   while(!gapi.hangout.isApiReady()) {};
+  generateSecureKey();
   gapi.hangout.data.setValue("keys", JSON.stringify(keysPressed));
   bodyElem.keydown(function(evt) {
     if(keysPressed.indexOf(evt.which) == -1) {
@@ -47,8 +48,8 @@ function setData(key, value) {
 function generateSecureKey() {
 	gapi.hangout.layout.displayNotice("Generating a secure key for your channel, please move your mouse at random for a few seconds.", false);
 	var seeds = new Array();
-	int lastX = 0;
-	int lastY = 0;
+	var lastX = 0;
+	var lastY = 0;
 	$("body").append("<div id='randGen'></div>");
 	$("#randGen").mousemove(function(evt) {
 		if(Math.round(Math.random()*100) <= 30)
